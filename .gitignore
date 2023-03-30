@@ -36,3 +36,6 @@ build/
 *.class
 *.jar
 *.DS_Store
+checkstyle.xml
+api-tests.yml
+/target
