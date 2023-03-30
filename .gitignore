@@ -50,4 +50,5 @@ api-tests.yml
 /target
 *.db
 db/*
+.github
 
