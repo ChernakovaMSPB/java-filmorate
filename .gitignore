@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+/.mvn/
+
+*.class
+*.jar
+*.DS_Store
