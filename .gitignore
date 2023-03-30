@@ -9,7 +9,6 @@
 *.rar
 hs_err_pid*
 out/
-HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -42,13 +41,6 @@ build/
 
 ### VS Code ###
 .vscode/
-/.mvn/
 
-*.DS_Store
-checkstyle.xml
-api-tests.yml
-/target
 *.db
 db/*
-.github
-
