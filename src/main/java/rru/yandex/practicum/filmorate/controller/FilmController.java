@@ -17,7 +17,9 @@ public class FilmController {
 
     @GetMapping
     public Collection<Film> findAll() {
-        return films.values();
+        return new ArrayList<>(films.values());
+
+//        return films.values();
     }
 
     @PostMapping
@@ -48,7 +50,7 @@ public class FilmController {
     }
 
     public static boolean validationFilm(Film film) {
-        if (film.getName().isEmpty()) {
+        if (film.getName().isBlank()) {
             throw new ValidationException("Название фильма не должно быть пустым");
         }
         if ((film.getDescription().length()) > 200 || (film.getDescription().isBlank())) {
