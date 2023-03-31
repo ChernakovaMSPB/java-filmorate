@@ -53,7 +53,7 @@ public class UserController {
         if ((user.getLogin().isBlank()) || (user.getLogin().contains(" "))) {
             throw new ValidationException("Некорректный логин пользователя: " + user.getLogin());
         }
-        if (user.getName().isBlank()) {
+        if (user.getName() == null) {
             user.setName(user.getLogin());
         }
         if (user.getBirthday().isAfter(LocalDate.now())) {
