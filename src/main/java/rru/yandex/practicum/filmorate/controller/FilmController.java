@@ -35,7 +35,7 @@ public class FilmController {
     public Film update(@RequestBody Film film) {
         if (validationFilm(film)) {
             Film film1 = films.get(film.getId());
-            if (film.getName().isBlank()) {
+            if (!film.getName().isBlank()) {
                 film1.setName(film.getName());
             }
             film1.setDescription(film.getDescription());
