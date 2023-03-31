@@ -35,7 +35,6 @@ public class UserController {
     public User update(@RequestBody User user) {
         if (validationUser(user)) {
             User user1 = users.get(String.valueOf(user.getId()));
-//            User user1 = users.get(user.getId());
             user1.setEmail(user.getEmail());
             user1.setLogin(user.getLogin());
             user1.setName(user.getName());
