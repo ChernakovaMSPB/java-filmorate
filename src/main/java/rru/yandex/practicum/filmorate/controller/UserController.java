@@ -47,15 +47,18 @@ public class UserController {
 
     public static boolean validationUser(User user) {
         if (user.getEmail() == null || (!user.getEmail().contains("@")) || (user.getEmail().isBlank())) {
+            log.info("Некорректный e-mail пользователя {}", user.getEmail());
             throw new ValidationException("Некорректный e-mail пользователя: " + user.getEmail());
         }
         if ((user.getLogin().isBlank()) || (user.getLogin().contains(" "))) {
+            log.info("Некорректный логин пользователя {}", user.getLogin());
             throw new ValidationException("Некорректный логин пользователя: " + user.getLogin());
         }
         if (user.getName() == null) {
             user.setName(user.getLogin());
         }
         if (user.getBirthday().isAfter(LocalDate.now())) {
+            log.info("Некорректная дата рождения пользователя {}", user.getBirthday());
             throw new ValidationException("Некорректная дата рождения пользователя: " + user.getBirthday());
         }
         return true;
