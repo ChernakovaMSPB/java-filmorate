@@ -9,9 +9,6 @@ import rru.yandex.practicum.filmorate.model.Film;
 import rru.yandex.practicum.filmorate.storage.FilmStorage;
 import rru.yandex.practicum.filmorate.storage.UserStorage;
 
-import java.io.FileNotFoundException;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 

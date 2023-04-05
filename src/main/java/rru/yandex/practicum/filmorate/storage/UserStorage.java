@@ -3,7 +3,6 @@ package rru.yandex.practicum.filmorate.storage;
 import rru.yandex.practicum.filmorate.model.User;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface UserStorage {
     Collection<User> findAll();

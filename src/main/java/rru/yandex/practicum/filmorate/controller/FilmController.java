@@ -3,13 +3,10 @@ package rru.yandex.practicum.filmorate.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import rru.yandex.practicum.filmorate.exceptions.ValidationException;
 import rru.yandex.practicum.filmorate.model.Film;
 import rru.yandex.practicum.filmorate.service.FilmService;
 import rru.yandex.practicum.filmorate.storage.FilmStorage;
 
-import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.*;
 
 @RestController
@@ -104,7 +101,7 @@ public class FilmController {
 
     @DeleteMapping("/{id}")
     public Film delete(@PathVariable Long id) {
-        log.info("Получен DELETE-запрос к эндпоинту: '/films' на удаление фильма с ID={}", id);
+        log.info("Получен DELETE-запрос на удаление фильма с id {}", id);
         return filmStorage.delete(id);
     }
 }

@@ -58,7 +58,7 @@ public class InMemoryFilmStorage implements FilmStorage {
     @Override
     public Film delete(Long filmId) {
         if (filmId == null) {
-            throw new ValidationException("Переда пустой аргумент");
+            throw new ValidationException("Передан пустой аргумент");
         }
         if (!films.containsKey(filmId)) {
             throw new FilmNotFoundException("Фильм по id " + filmId + "не найден");

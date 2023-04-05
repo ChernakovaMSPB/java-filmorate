@@ -3,13 +3,10 @@ package rru.yandex.practicum.filmorate.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import rru.yandex.practicum.filmorate.exceptions.ValidationException;
-import rru.yandex.practicum.filmorate.model.Film;
 import rru.yandex.practicum.filmorate.model.User;
 import rru.yandex.practicum.filmorate.service.UserService;
 import rru.yandex.practicum.filmorate.storage.UserStorage;
 
-import java.time.LocalDate;
 import java.util.*;
 
 @RestController
