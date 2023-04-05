@@ -52,7 +52,7 @@ public class FilmService {
 
     public List<Film> getPopular(Integer count) {
         if (count < 1) { // 10 популярных фильмов для вывода
-            new ValidationException("Количество фильмов для вывода не должно быть меньше 1");
+            throw new ValidationException("Количество фильмов для вывода не должно быть меньше 1");
         }
         return filmStorage.findAll().stream()
                 .sorted((o1, o2) -> o2.getLikes().size() - o1.getLikes().size())

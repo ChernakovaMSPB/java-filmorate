@@ -25,7 +25,7 @@ public class InMemoryUserStorage implements UserStorage {
     public User create(User user) {
         if (validationUser(user)) {
             user.setId(id);
-            users.put(Long.valueOf(id), user);
+            users.put(id, user);
             id++;
             log.info("Добавлен пользователь: " + user);
         }

@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class UserControllerTest {
-    private User user;
-    private UserController userController;
-    private UserStorage userStorage;
+    User user;
+    UserController userController;
+    UserStorage userStorage;
 
     @BeforeEach
     public void beforeEach() {
@@ -27,7 +27,7 @@ public class UserControllerTest {
         user = User.builder()
                 .name("MyName")
                 .login("MaxPower")
-                .email("1@ya.ru")
+                .email("  ")
                 .birthday(LocalDate.of(1980, 12, 23))
                 .build();
     }

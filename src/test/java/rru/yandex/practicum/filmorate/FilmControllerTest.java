@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class FilmControllerTest {
-    private Film film;
-    private FilmController filmController;
-    private FilmStorage filmStorage;
-    private UserStorage userStorage;
+    Film film;
+    FilmController filmController;
+    FilmStorage filmStorage;
+    UserStorage userStorage;
 
     @BeforeEach
     public void beforeEach() {
