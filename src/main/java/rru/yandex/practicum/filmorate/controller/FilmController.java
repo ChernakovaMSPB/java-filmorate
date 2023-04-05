@@ -49,8 +49,8 @@ public class FilmController {
 //            log.info("Добавлен фильм: " + film);
 //        }
         log.info("Добавлен фильм: " + film);
-        film = filmStorage.create(film);
-        return film;
+        return filmStorage.create(film);
+//        return film;
     }
 
     @PutMapping
@@ -67,8 +67,8 @@ public class FilmController {
 //            log.info("Фильм обновлен " + film1);
 //        }
         log.info("Фильм обновлен " + film);
-        film = filmStorage.update(film);
-        return film;
+        return filmStorage.update(film);
+//        return film;
     }
 
     //    public static boolean validationFilm(Film film) {
