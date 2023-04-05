@@ -5,10 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,13 +15,12 @@ import java.util.Set;
 public class User {
 
     Long id;
-    @Email
+
     String email;
-    @NotBlank
-    @Pattern(regexp = "\\S*$")
+
     String login;
     String name;
-    @PastOrPresent
+
     LocalDate birthday;
     Set<Long> friends;
 

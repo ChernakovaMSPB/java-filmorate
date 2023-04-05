@@ -3,9 +3,6 @@ package rru.yandex.practicum.filmorate.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,13 +13,13 @@ import java.util.Set;
 public class Film {
 
     Long id;
-    @NotBlank
+
     String name;
-    @Size(min = 1, max = 200)
+
     String description;
-    @NonNull
+
     LocalDate releaseDate;
-    @Positive
+
     Integer duration;
     Set<Long> likes;
 
