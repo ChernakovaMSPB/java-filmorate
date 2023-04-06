@@ -82,12 +82,7 @@ public class UserController {
         userService.deleteFriend(id, friendId);
     }
 
-//    @DeleteMapping("/{id}")
-//    public User delete(@PathVariable Long id) {
-//        log.info("Получен DELETE-запрос на удаление пользователя с id {}", id);
-//        return userStorage.delete(id);
-//    }
-
+//
 //    public static boolean validationUser(User user) {
 //        if (user.getEmail() == null || (!user.getEmail().contains("@")) || (user.getEmail().isBlank())) {
 //            log.info("Некорректный e-mail пользователя {}", user.getEmail());
