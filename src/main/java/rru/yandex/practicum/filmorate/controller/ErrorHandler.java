@@ -4,8 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import rru.yandex.practicum.filmorate.exceptions.FilmNotFoundException;
-import rru.yandex.practicum.filmorate.exceptions.UserNotFoundException;
 import rru.yandex.practicum.filmorate.exceptions.ValidationException;
 import rru.yandex.practicum.filmorate.model.ErrorResponse;
 
@@ -14,7 +12,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404 ошибка
-    public ErrorResponse handleUserNotFoundException(final UserNotFoundException e) {
+    public ErrorResponse handleUserNotFoundException(final RuntimeException e) {
         return new ErrorResponse(e.getMessage());
     }
 
@@ -26,7 +24,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)//500 ошибка
-    public ErrorResponse handleFilmNotFoundException(final FilmNotFoundException e) {
+    public ErrorResponse handleFilmNotFoundException(final Exception e) {
         return new ErrorResponse(e.getMessage());
     }
 }
