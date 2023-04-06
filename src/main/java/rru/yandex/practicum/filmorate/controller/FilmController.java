@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import rru.yandex.practicum.filmorate.model.Film;
 import rru.yandex.practicum.filmorate.service.FilmService;
-import rru.yandex.practicum.filmorate.storage.FilmStorage;
 
 import java.util.*;
 
@@ -15,28 +14,28 @@ import java.util.*;
 public class FilmController {
     //    private final Map<Integer, Film> films = new HashMap<>();
 //    private Integer id = 1;
-    private FilmStorage filmStorage;
-    private FilmService filmService;
+//    private FilmStorage filmStorage;
+    FilmService filmService;
 
     @Autowired
-    public FilmController(FilmStorage filmStorage, FilmService filmService) {
-        this.filmStorage = filmStorage;
+    public FilmController(FilmService filmService) {
         this.filmService = filmService;
     }
 
     @GetMapping
-    public Collection<Film> findAll() {
+    public List<Film> findAll() {
 //        return films.values();
-        return filmStorage.findAll();
+        return filmService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Film getFilmById(@PathVariable Long id) {
-        return filmStorage.getFilmById(id);
+    public Film getFilmById(@PathVariable long id) {
+        return filmService.getFilmById(id);
     }
 
     @GetMapping("/popular")
-    public List<Film> getPopular(@RequestParam(name = "count", defaultValue = "10") Integer count) {
+    public List<Film> getPopular(@RequestParam(required = false) Integer count) {
+        if (count == null) count = 10;
         return filmService.getPopular(count);
     }
 
@@ -49,7 +48,7 @@ public class FilmController {
 //            log.info("Добавлен фильм: " + film);
 //        }
         log.info("Добавлен фильм: " + film);
-        return filmStorage.create(film);
+        return filmService.create(film);
 //        return film;
     }
 
@@ -67,7 +66,7 @@ public class FilmController {
 //            log.info("Фильм обновлен " + film1);
 //        }
         log.info("Фильм обновлен " + film);
-        return filmStorage.update(film);
+        return filmService.update(film);
 //        return film;
     }
 
@@ -90,18 +89,18 @@ public class FilmController {
 //        return true;
 //    }
     @PutMapping("/{id}/like/{userId}")
-    public void addLike(@PathVariable Long id, @PathVariable Long userId) {
+    public void addLike(@PathVariable long id, @PathVariable long userId) {
         filmService.addLike(id, userId);
     }
 
     @DeleteMapping("/{id}/like/{userId}")
-    public void deleteLike(@PathVariable Long id, @PathVariable Long userId) {
+    public void deleteLike(@PathVariable long id, @PathVariable long userId) {
         filmService.deleteLike(id, userId);
     }
 
-    @DeleteMapping("/{id}")
-    public Film delete(@PathVariable Long id) {
-        log.info("Получен DELETE-запрос на удаление фильма с id {}", id);
-        return filmStorage.delete(id);
-    }
+//    @DeleteMapping("/{id}")
+//    public Film delete(@PathVariable Long id) {
+//        log.info("Получен DELETE-запрос на удаление фильма с id {}", id);
+//        return filmStorage.delete(id);
+//    }
 }

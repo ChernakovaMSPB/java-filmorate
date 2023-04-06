@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import rru.yandex.practicum.filmorate.model.User;
 import rru.yandex.practicum.filmorate.service.UserService;
-import rru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.util.*;
 
@@ -13,35 +12,34 @@ import java.util.*;
 @RequestMapping("/users")
 @Slf4j
 public class UserController {
-//    private final Map<String, User> users = new HashMap<>();
+    //    private final Map<String, User> users = new HashMap<>();
 //    private Integer id = 1;
-    private UserStorage userStorage;
-    private UserService userService;
+//    private UserStorage userStorage;
+    UserService userService;
 
     @Autowired
-    public UserController(UserStorage userStorage, UserService userService) {
-        this.userStorage = userStorage;
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
-    public Collection<User> findAll() {
+    public List<User> findAll() {
 //        return users.values();
-        return userStorage.findAll();
+        return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userStorage.getUserById(id);
+    public User getUserById(@PathVariable long id) {
+        return userService.getUserById(id);
     }
 
     @GetMapping("/{id}/friends")
-    public List<User> getFriends(@PathVariable Long id) {
-        return userService.getFriends(id);
+    public List<User> getFriends(@PathVariable long id) {
+        return userService.getAllFriends(id);
     }
 
     @GetMapping("/{id}/friends/common/{otherId}")
-    public List<User> getCommonFriends(@PathVariable Long id, @PathVariable Long otherId) {
+    public List<User> getCommonFriends(@PathVariable long id, @PathVariable long otherId) {
         return userService.getCommonFriends(id, otherId);
     }
 
@@ -53,9 +51,9 @@ public class UserController {
 //            id++;
 //            log.info("Добавлен пользователь: " + user);
 //        }
-        log.info("Добавлен пользователь: " + user);
-        user = userStorage.create(user);
-        return user;
+//        log.info("Добавлен пользователь: " + user);
+        return userService.create(user);
+//        return user;
     }
 
     @PutMapping
@@ -70,25 +68,25 @@ public class UserController {
 //            log.info("Данные пользователя " + user1 + "обновлены");
 //        }
         log.info("Данные пользователя " + user + "обновлены");
-        user = userStorage.update(user);
-        return user;
+        return userService.update(user);
+//        return user;
     }
 
     @PutMapping("/{id}/friends/{friendId}")
-    public void addFriend(@PathVariable Long id, @PathVariable Long friendId) {
+    public void addFriend(@PathVariable long id, @PathVariable long friendId) {
         userService.addFriend(id, friendId);
     }
 
     @DeleteMapping("/{id}/friends/{friendId}")
-    public void deleteFriend(@PathVariable Long id, @PathVariable Long friendId) {
+    public void deleteFriend(@PathVariable long id, @PathVariable long friendId) {
         userService.deleteFriend(id, friendId);
     }
 
-    @DeleteMapping("/{id}")
-    public User delete(@PathVariable Long id) {
-        log.info("Получен DELETE-запрос на удаление пользователя с id {}", id);
-        return userStorage.delete(id);
-    }
+//    @DeleteMapping("/{id}")
+//    public User delete(@PathVariable Long id) {
+//        log.info("Получен DELETE-запрос на удаление пользователя с id {}", id);
+//        return userStorage.delete(id);
+//    }
 
 //    public static boolean validationUser(User user) {
 //        if (user.getEmail() == null || (!user.getEmail().contains("@")) || (user.getEmail().isBlank())) {

@@ -9,10 +9,9 @@ import java.util.Set;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Builder
 public class Film {
 
-    Long id;
+    long id;
 
     String name;
 
@@ -21,17 +20,17 @@ public class Film {
     LocalDate releaseDate;
 
     Integer duration;
-    Set<Long> likes;
+    Set<Long> likes = new HashSet<>();
 
-    public Film(Long id, String name, String description, LocalDate releaseDate, Integer duration, Set<Long> likes) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.releaseDate = releaseDate;
-        this.duration = duration;
-        this.likes = likes;
-        if (likes == null) {
-            this.likes = new HashSet<>();
-        }
+    public Set<Long> getLikes() {
+        return likes;
+    }
+
+    public void addLikes(long id) {
+        likes.add(id);
+    }
+
+    public void deleteLikes(long id) {
+        likes.remove(id);
     }
 }
