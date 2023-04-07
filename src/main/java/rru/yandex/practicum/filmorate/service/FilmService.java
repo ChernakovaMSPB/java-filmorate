@@ -86,7 +86,7 @@ public class FilmService {
         return topFilms;
     }
 
-    public static boolean validationFilm(Film film) {
+    public static void validationFilm(Film film) {
         if (film.getName().isBlank()) {
             throw new ValidationException("Название фильма не должно быть пустым");
         }
@@ -102,7 +102,6 @@ public class FilmService {
             log.info("Продолжительность фильма {} должна быть положительной", film.getDuration());
             throw new ValidationException("Продолжительность фильма должна быть положительной: " + film.getDuration());
         }
-        return true;
     }
 
 }

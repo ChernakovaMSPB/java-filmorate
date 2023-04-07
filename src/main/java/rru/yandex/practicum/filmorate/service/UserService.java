@@ -93,7 +93,7 @@ public class UserService {
         return commonFriends;
     }
 
-    public static boolean validationUser(User user) {
+    public static void validationUser(User user) {
         if (user.getEmail() == null || (!user.getEmail().contains("@")) || (user.getEmail().isBlank())) {
             log.info("Некорректный e-mail пользователя {}", user.getEmail());
             throw new ValidationException("Некорректный e-mail пользователя: " + user.getEmail());
@@ -109,6 +109,5 @@ public class UserService {
             log.info("Некорректная дата рождения пользователя {}", user.getBirthday());
             throw new ValidationException("Некорректная дата рождения пользователя: " + user.getBirthday());
         }
-        return true;
     }
 }
