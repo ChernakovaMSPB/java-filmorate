@@ -27,7 +27,7 @@ public class UserService {
         if (user.getName() == null || user.getName().equals(" ")) {
             user.setName(user.getLogin());
         }
-        userStorage.add(user);
+        userStorage.create(user);
         return user;
     }
 
@@ -36,7 +36,7 @@ public class UserService {
         if (userStorage.getById(user.getId()) == null) {
             throw new RuntimeException("Пользователь для обновления не найден");
         }
-        userStorage.add(user);
+        userStorage.create(user);
         return user;
     }
 
@@ -71,23 +71,23 @@ public class UserService {
 
     public List<User> getAllFriends(long userId) {
         User user = userStorage.getById(userId);
-        List<User> friends = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         if (user == null)
             throw new RuntimeException("Пользователь не найден");
         for (Long friendId : user.getFriends()) {
-            friends.add(userStorage.getById(friendId));
+            users.add(userStorage.getById(friendId));
         }
 
-        return friends;
+        return users;
     }
 
     public List<User> getCommonFriends(long firstUserId, long secondUserId) {
         List<User> firstUsers = getAllFriends(firstUserId);
-        List<User> secondUser = getAllFriends(secondUserId);
+        List<User> secondUsers = getAllFriends(secondUserId);
         List<User> commonFriends = new ArrayList<>();
 
         for (User firstUser : firstUsers) {
-            if (secondUser.contains(firstUser))
+            if (secondUsers.contains(firstUser))
                 commonFriends.add(firstUser);
         }
         return commonFriends;

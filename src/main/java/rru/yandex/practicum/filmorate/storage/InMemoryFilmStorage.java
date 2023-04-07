@@ -9,7 +9,7 @@ import java.util.*;
 public class InMemoryFilmStorage implements FilmStorage {
     Map<Long, Film> films = new LinkedHashMap<>();
 
-    public void add(Film film) {
+    public void create(Film film) {
         films.put(film.getId(), film);
     }
 

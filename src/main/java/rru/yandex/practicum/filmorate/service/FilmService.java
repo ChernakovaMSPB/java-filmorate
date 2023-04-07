@@ -36,7 +36,7 @@ public class FilmService {
     public Film create(Film film) {
         validationFilm(film);
         film.setId(id++);
-        filmStorage.add(film);
+        filmStorage.create(film);
         return film;
     }
 
@@ -45,7 +45,7 @@ public class FilmService {
         if (filmStorage.getById(film.getId()) == null) {
             throw new RuntimeException("Фильм для обновления не найден");
         }
-        filmStorage.add(film);
+        filmStorage.create(film);
         return film;
     }
 
