@@ -7,6 +7,7 @@ import java.util.*;
 
 @Component
 public class InMemoryUserStorage implements UserStorage {
+
     Map<Long, User> users = new LinkedHashMap<>();
 
     @Override

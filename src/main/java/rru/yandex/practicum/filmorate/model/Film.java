@@ -20,6 +20,7 @@ public class Film {
     LocalDate releaseDate;
 
     Integer duration;
+
     Set<Long> likes = new HashSet<>();
 
     public Set<Long> getLikes() {

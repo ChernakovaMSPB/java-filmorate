@@ -7,6 +7,7 @@ import java.util.*;
 
 @Component
 public class InMemoryFilmStorage implements FilmStorage {
+
     Map<Long, Film> films = new LinkedHashMap<>();
 
     public void create(Film film) {

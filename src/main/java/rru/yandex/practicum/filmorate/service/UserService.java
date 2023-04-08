@@ -13,6 +13,7 @@ import java.util.*;
 @Service
 @Slf4j
 public class UserService {
+
     @Autowired
     private UserStorage userStorage;
     long id = 1;
@@ -102,7 +103,7 @@ public class UserService {
             log.info("Некорректный логин пользователя {}", user.getLogin());
             throw new ValidationException("Некорректный логин пользователя: " + user.getLogin());
         }
-        if (user.getName() == null) {
+        if ((user.getName().isBlank()) || (user.getName().isEmpty())) {
             user.setName(user.getLogin());
         }
         if (user.getBirthday().isAfter(LocalDate.now())) {

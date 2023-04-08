@@ -12,19 +12,19 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND) //404 ошибка
-    public ErrorResponse handleUserNotFoundException(final RuntimeException e) {
-        return new ErrorResponse(e.getMessage());
+    public ErrorResponse handleUserNotFoundException(RuntimeException e) {
+        return new ErrorResponse(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST) //400 ошибка
-    public ErrorResponse handleValidationException(final ValidationException e) {
-        return new ErrorResponse(e.getMessage());
+    public ErrorResponse handleValidationException(ValidationException e) {
+        return new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)//500 ошибка
     public ErrorResponse handleFilmNotFoundException(final Exception e) {
-        return new ErrorResponse(e.getMessage());
+        return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     }
 }
