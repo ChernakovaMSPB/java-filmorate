@@ -29,7 +29,7 @@ public class FilmService {
     public Film getFilmById(long id) {
         Film film = filmStorage.getById(id);
         if (film == null) {
-            throw new RuntimeException("Фильм не найден");
+            throw new RuntimeException("Фильм " + id + " не найден");
         }
         return film;
     }
@@ -52,22 +52,22 @@ public class FilmService {
 
     public void addLike(long id, long userId) {
         if (userStorage.getById(userId) == null) {
-            throw new RuntimeException("Пользователь не найден");
+            throw new RuntimeException("Пользователь " + userId + " не найден");
         }
         Film film = filmStorage.getById(id);
         if (film == null) {
-            throw new RuntimeException("Фильм не найден");
+            throw new RuntimeException("Фильм по " + id +  " не найден");
         }
         film.addLikes(userId);
     }
 
     public void deleteLike(long id, long userId) {
         if (userStorage.getById(userId) == null) {
-            throw new RuntimeException("Пользователь не найден");
+            throw new RuntimeException("Пользователь " + userId + " не найден");
         }
         Film film = filmStorage.getById(id);
         if (film == null) {
-            throw new RuntimeException("Фильм не найден");
+            throw new RuntimeException("Фильм по " + id +  " не найден");
         }
         film.deleteLikes(userId);
     }
