@@ -60,6 +60,7 @@ public class UserService {
         friend.addFriends(userId);
 //        user.addFriends(userId);
 //        friend.addFriends(friendId);
+
     }
 
     public void deleteFriend(long userId, long friendId) {
