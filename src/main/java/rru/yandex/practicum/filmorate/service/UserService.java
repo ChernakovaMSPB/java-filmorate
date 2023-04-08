@@ -49,7 +49,6 @@ public class UserService {
         return user;
     }
 
-
     public void addFriend(long userId, long friendId) {
         User user = userStorage.getById(userId);
         User friend = userStorage.getById(friendId);
@@ -58,9 +57,6 @@ public class UserService {
         }
         user.addFriends(friendId);
         friend.addFriends(userId);
-//        user.addFriends(userId);
-//        friend.addFriends(friendId);
-
     }
 
     public void deleteFriend(long userId, long friendId) {
@@ -81,7 +77,6 @@ public class UserService {
         for (Long friendId : user.getFriends()) {
             users.add(userStorage.getById(friendId));
         }
-
         return users;
     }
 

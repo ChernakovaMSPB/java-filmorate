@@ -43,14 +43,12 @@ public class UserController {
 
     @PostMapping
     public User create(@RequestBody User user) {
-
         return userService.create(user);
 
     }
 
     @PutMapping
     public User update(@RequestBody User user) {
-
         log.info("Данные пользователя " + user + "обновлены");
         return userService.update(user);
 
