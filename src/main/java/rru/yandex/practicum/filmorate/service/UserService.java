@@ -56,8 +56,10 @@ public class UserService {
         if (user == null || friend == null) {
             throw new RuntimeException("Нет возможности добавить пользователя в друзья (один из пользователей не найден)");
         }
-        user.addFriends(userId);
-        friend.addFriends(friendId);
+        user.addFriends(friendId);
+        friend.addFriends(userId);
+//        user.addFriends(userId);
+//        friend.addFriends(friendId);
     }
 
     public void deleteFriend(long userId, long friendId) {
