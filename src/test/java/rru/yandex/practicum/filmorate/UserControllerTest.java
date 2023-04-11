@@ -2,9 +2,9 @@ package rru.yandex.practicum.filmorate;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import rru.yandex.practicum.filmorate.controller.UserController;
 import rru.yandex.practicum.filmorate.exceptions.ValidationException;
 import rru.yandex.practicum.filmorate.model.User;
+import rru.yandex.practicum.filmorate.service.UserService;
 
 import java.time.LocalDate;
 
@@ -21,7 +21,7 @@ public class UserControllerTest {
         user.setEmail("Olga@email.ru");
         user.setBirthday(LocalDate.of(1985, 6, 15));
 
-        assertThrows(ValidationException.class, () -> UserController.validationUser(user));
+        assertThrows(ValidationException.class, () -> UserService.validationUser(user));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class UserControllerTest {
         user.setEmail("gleb@email.ru");
         user.setBirthday(LocalDate.of(1992, 11, 10));
 
-        assertThrows(ValidationException.class, () -> UserController.validationUser(user));
+        assertThrows(ValidationException.class, () -> UserService.validationUser(user));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class UserControllerTest {
         user.setLogin("Pavel");
         user.setBirthday(LocalDate.of(1975, 11, 12));
 
-        assertThrows(ValidationException.class, () -> UserController.validationUser(user));
+        assertThrows(ValidationException.class, () -> UserService.validationUser(user));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class UserControllerTest {
         user.setEmail("alexemail.ru");
         user.setBirthday(LocalDate.of(1991, 5, 15));
 
-        assertThrows(ValidationException.class, () -> UserController.validationUser(user));
+        assertThrows(ValidationException.class, () -> UserService.validationUser(user));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class UserControllerTest {
         user.setEmail("");
         user.setBirthday(LocalDate.of(1990, 11, 10));
 
-        assertThrows(ValidationException.class, () -> UserController.validationUser(user));
+        assertThrows(ValidationException.class, () -> UserService.validationUser(user));
     }
 
     @Test
@@ -75,6 +75,6 @@ public class UserControllerTest {
         user.setEmail("natali@email.ru");
         user.setBirthday(LocalDate.of(2028, 5, 16));
 
-        assertThrows(ValidationException.class, () -> UserController.validationUser(user));
+        assertThrows(ValidationException.class, () -> UserService.validationUser(user));
     }
 }
