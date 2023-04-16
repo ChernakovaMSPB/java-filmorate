@@ -1,7 +1,6 @@
 package rru.yandex.practicum.filmorate.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import rru.yandex.practicum.filmorate.model.User;
 import rru.yandex.practicum.filmorate.service.UserService;
@@ -13,16 +12,14 @@ import java.util.*;
 @Slf4j
 public class UserController {
 
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
     public List<User> findAll() {
-
         return userService.findAll();
     }
 
@@ -44,14 +41,12 @@ public class UserController {
     @PostMapping
     public User create(@RequestBody User user) {
         return userService.create(user);
-
     }
 
     @PutMapping
     public User update(@RequestBody User user) {
         log.info("Данные пользователя {} обновлены ", user.getId());
         return userService.update(user);
-
     }
 
     @PutMapping("/{id}/friends/{friendId}")

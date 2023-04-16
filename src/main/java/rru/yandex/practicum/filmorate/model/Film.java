@@ -4,8 +4,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -20,18 +20,22 @@ public class Film {
     LocalDate releaseDate;
 
     Integer duration;
+    Mpa mpa;
+    List<Genre> genres = new ArrayList<>();
 
-    Set<Long> likes = new HashSet<>();
-
-    public Set<Long> getLikes() {
-        return likes;
+    public Film() {
     }
 
-    public void addLikes(long id) {
-        likes.add(id);
+    public Film(long id, String name, String description, LocalDate releaseDate, Integer duration, Mpa mpa) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.mpa = mpa;
     }
 
-    public void deleteLikes(long id) {
-        likes.remove(id);
+    public void createGenre(Genre genre) {
+        genres.add(genre);
     }
 }
