@@ -10,8 +10,9 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     Map<Long, Film> films = new LinkedHashMap<>();
 
-    public void create(Film film) {
+    public Film create(Film film) {
         films.put(film.getId(), film);
+        return film;
     }
 
     public Film getById(long id) {
@@ -20,6 +21,21 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     public List<Film> findAll() {
         return new ArrayList<>(films.values());
+    }
+
+    @Override
+    public Film update(Film film) {
+        return null;
+    }
+
+    @Override
+    public void deleteFilm(long id) {
+
+    }
+
+    @Override
+    public List<Film> getPopular(int count) {
+        return null;
     }
 }
 
