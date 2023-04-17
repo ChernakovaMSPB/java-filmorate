@@ -1,10 +1,11 @@
 package rru.yandex.practicum.filmorate.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import rru.yandex.practicum.filmorate.exceptions.ValidationException;
 import rru.yandex.practicum.filmorate.model.User;
+import rru.yandex.practicum.filmorate.storage.FriendStorage;
 import rru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.time.LocalDate;
@@ -13,10 +14,13 @@ import java.util.*;
 @Service
 @Slf4j
 public class UserService {
+    private final UserStorage userStorage;
+    private final FriendStorage friendStorage;
 
-    @Autowired
-    private UserStorage userStorage;
-    long id = 1;
+    public UserService(@Qualifier("UserDbStorage") UserStorage userStorage, FriendStorage friendStorage) {
+        this.userStorage = userStorage;
+        this.friendStorage = friendStorage;
+    }
 
     public List<User> findAll() {
         return userStorage.findAll();
@@ -24,25 +28,24 @@ public class UserService {
 
     public User create(User user) {
         validationUser(user);
-        user.setId(id++);
         if (user.getName() == null || user.getName().equals(" ")) {
             user.setName(user.getLogin());
         }
-        userStorage.create(user);
-        return user;
+        User addedUser = userStorage.create(user);
+        return addedUser;
     }
 
     public User update(User user) {
         validationUser(user);
-        if (userStorage.getById(user.getId()) == null) {
+        if (userStorage.findById(user.getId()) == null) {
             throw new RuntimeException("Пользователь для обновления не найден");
         }
-        userStorage.create(user);
+        userStorage.update(user);
         return user;
     }
 
     public User getUserById(long id) {
-        User user = userStorage.getById(id);
+        User user = userStorage.findById(id);
         if (user == null) {
             throw new RuntimeException("Пользователь не найден");
         }
@@ -50,34 +53,28 @@ public class UserService {
     }
 
     public void addFriend(long userId, long friendId) {
-        User user = userStorage.getById(userId);
-        User friend = userStorage.getById(friendId);
+        User user = userStorage.findById(userId);
+        User friend = userStorage.findById(friendId);
         if (user == null || friend == null) {
             throw new RuntimeException("Нет возможности добавить пользователя в друзья (один из пользователей не найден)");
         }
-        user.addFriends(friendId);
-        friend.addFriends(userId);
+        friendStorage.addFriends(userId, friendId);
     }
 
     public void deleteFriend(long userId, long friendId) {
-        User user = userStorage.getById(userId);
-        User friend = userStorage.getById(friendId);
+        User user = userStorage.findById(userId);
+        User friend = userStorage.findById(friendId);
         if (user == null || friend == null) {
             throw new RuntimeException("Нет возможности удалить пользователя из друзей (один из пользователей не найден)");
         }
-        user.deleteFriends(userId);
-        friend.deleteFriends(friendId);
+        friendStorage.deleteFriends(userId, friendId);
     }
 
     public List<User> getAllFriends(long userId) {
-        User user = userStorage.getById(userId);
-        List<User> users = new ArrayList<>();
+        User user = userStorage.findById(userId);
         if (user == null)
             throw new RuntimeException("Пользователь не найден");
-        for (Long friendId : user.getFriends()) {
-            users.add(userStorage.getById(friendId));
-        }
-        return users;
+        return friendStorage.getAllFriends(userId);
     }
 
     public List<User> getCommonFriends(long firstUserId, long secondUserId) {

@@ -1,26 +1,31 @@
 package rru.yandex.practicum.filmorate.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import rru.yandex.practicum.filmorate.exceptions.ValidationException;
 import rru.yandex.practicum.filmorate.model.Film;
 import rru.yandex.practicum.filmorate.storage.FilmStorage;
+import rru.yandex.practicum.filmorate.storage.LikeStorage;
 import rru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Slf4j
 public class FilmService {
+    private final FilmStorage filmStorage;
+    private final UserStorage userStorage;
+    private final LikeStorage likeStorage;
 
-    @Autowired
-    FilmStorage filmStorage;
-    @Autowired
-    UserStorage userStorage;
-    long id = 1;
+    public FilmService(@Qualifier("FilmDbStorage") FilmStorage filmStorage,
+                       @Qualifier("UserDbStorage") UserStorage userStorage,
+                       LikeStorage likeStorage) {
+        this.filmStorage = filmStorage;
+        this.userStorage = userStorage;
+        this.likeStorage = likeStorage;
+    }
 
     public List<Film> findAll() {
         return filmStorage.findAll();
@@ -36,9 +41,7 @@ public class FilmService {
 
     public Film create(Film film) {
         validationFilm(film);
-        film.setId(id++);
-        filmStorage.create(film);
-        return film;
+        return filmStorage.create(film);
     }
 
     public Film update(Film film) {
@@ -46,45 +49,33 @@ public class FilmService {
         if (filmStorage.getById(film.getId()) == null) {
             throw new RuntimeException("Фильм для обновления не найден");
         }
-        filmStorage.create(film);
-        return film;
+        return filmStorage.update(film);
     }
 
     public void addLike(long id, long userId) {
-        if (userStorage.getById(userId) == null) {
+        if (userStorage.findById(userId) == null) {
             throw new RuntimeException("Пользователь " + userId + " не найден");
         }
         Film film = filmStorage.getById(id);
         if (film == null) {
-            throw new RuntimeException("Фильм по " + id +  " не найден");
+            throw new RuntimeException("Фильм по " + id + " не найден");
         }
-        film.addLikes(userId);
+        likeStorage.addLikeToFilm(id, userId);
     }
 
     public void deleteLike(long id, long userId) {
-        if (userStorage.getById(userId) == null) {
+        if (userStorage.findById(userId) == null) {
             throw new RuntimeException("Пользователь " + userId + " не найден");
         }
         Film film = filmStorage.getById(id);
         if (film == null) {
-            throw new RuntimeException("Фильм по " + id +  " не найден");
+            throw new RuntimeException("Фильм по " + id + " не найден");
         }
-        film.deleteLikes(userId);
+        likeStorage.deleteLikeFromFilm(id, userId);
     }
 
     public List<Film> getPopular(Integer count) {
-        List<Film> topFilms = new ArrayList<>();
-        List<Film> allFilms = filmStorage.findAll();
-        allFilms.sort((Film f1, Film f2) -> f2.getLikes().size() - f1.getLikes().size());
-
-        if (allFilms.size() > count) {
-            for (int i = 0; i < count; i++) {
-                topFilms.add(allFilms.get(i));
-            }
-        } else {
-            topFilms.addAll(allFilms);
-        }
-        return topFilms;
+        return filmStorage.getPopular(count);
     }
 
     public static void validationFilm(Film film) {
