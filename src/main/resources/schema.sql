@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS mpa CASCADE;
 
 CREATE TABLE IF NOT EXISTS mpa (
     rating_id INTEGER   NOT NULL,
-    name VARCHAR(10)   NOT NULL,
+    mpa_name VARCHAR(10)   NOT NULL,
     PRIMARY KEY (rating_id)
     );
 
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS films (
 
 CREATE TABLE IF NOT EXISTS genre (
     genre_id int   NOT NULL,
-    name varchar   NOT NULL,
+    genre_name varchar   NOT NULL,
     PRIMARY KEY (genre_id)
     );
 

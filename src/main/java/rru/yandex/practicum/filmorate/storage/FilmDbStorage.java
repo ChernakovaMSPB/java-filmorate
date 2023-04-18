@@ -77,9 +77,9 @@ public class FilmDbStorage implements FilmStorage {
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlQuery, id);
         while (rowSet.next()) {
             Genre genre = new Genre(rowSet.getInt("genre_id"),
-                    rowSet.getString("name"));
+                    rowSet.getString("genre_name"));
             if (film == null) {
-                Mpa mpa = new Mpa(rowSet.getInt("rating_id"), rowSet.getString("name"));
+                Mpa mpa = new Mpa(rowSet.getInt("rating_id"), rowSet.getString("mpa_name"));
                 film = new Film(rowSet.getInt("film_id"),
                         rowSet.getString("name"),
                         rowSet.getString("description"),
@@ -106,7 +106,7 @@ public class FilmDbStorage implements FilmStorage {
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlQuery);
         while (rowSet.next()) {
             Mpa mpa = new Mpa(rowSet.getInt("rating_id"),
-                    rowSet.getString("name"));
+                    rowSet.getString("mpa_name"));
             long filmId = rowSet.getLong("film_id");
             Film film = new Film(filmId,
                     rowSet.getString("name"),
@@ -174,7 +174,7 @@ public class FilmDbStorage implements FilmStorage {
     public List<Film> getPopular(int count) {
         Map<Long, ArrayList<Genre>> filmGenres = getGenresMap();
 
-        String sqlQuery = "select f.*, count(fl.user_id) AS likes, mpa.name " +
+        String sqlQuery = "select f.*, count(fl.user_id) AS likes, mpa.MPA_NAME " +
                 "from films as f " +
                 "left join film_likes as fl on f.film_id=fl.film_id " +
                 "left join mpa as mpa on f.rating_id=mpa.rating_id " +
@@ -190,7 +190,7 @@ public class FilmDbStorage implements FilmStorage {
                     rowSet.getString("description"),
                     dateFormatter(rowSet.getString("release_date")),
                     rowSet.getInt("duration"),
-                    new Mpa(rowSet.getInt("rating_id"), rowSet.getString("name"))
+                    new Mpa(rowSet.getInt("rating_id"), rowSet.getString("mpa_name"))
             );
             if (filmGenres.containsKey(filmId)) {
                 film.setGenres(filmGenres.get(filmId));
@@ -228,7 +228,7 @@ public class FilmDbStorage implements FilmStorage {
         while (genresRowSet.next()) {
             long filmId = genresRowSet.getLong("film_id");
             Genre genre = new Genre(genresRowSet.getInt("genre_id"),
-                    genresRowSet.getString("name"));
+                    genresRowSet.getString("genre_name"));
             if (!filmGenres.containsKey(filmId)) {
                 ArrayList<Genre> newGenreArrayList = new ArrayList<>();
                 newGenreArrayList.add(genre);

@@ -20,11 +20,11 @@ public class MpaDbStorage implements MpaStorage {
 
     @Override
     public Mpa getMpaById(int id) {
-        String sqlQuery = "select * from mpa where rating_id = ?";
+        String sqlQuery = "select * from mpa where RATING_ID = ?";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlQuery, id);
         Mpa mpa = null;
         if (rowSet.next()) {
-            mpa = new Mpa(rowSet.getInt("rating_id"), rowSet.getString("name"));
+            mpa = new Mpa(rowSet.getInt("rating_id"), rowSet.getString("mpa_name"));
         }
         return mpa;
     }
@@ -35,7 +35,7 @@ public class MpaDbStorage implements MpaStorage {
         String sqlQuery = "select * from mpa";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sqlQuery);
         while (rowSet.next()) {
-            Mpa mpa = new Mpa(rowSet.getInt("rating_id"), rowSet.getString("name"));
+            Mpa mpa = new Mpa(rowSet.getInt("rating_id"), rowSet.getString("mpa_name"));
             mpas.add(mpa);
         }
         return mpas;

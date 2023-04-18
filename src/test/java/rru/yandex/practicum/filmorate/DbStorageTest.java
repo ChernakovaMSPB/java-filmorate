@@ -48,18 +48,18 @@ public class DbStorageTest {
             LocalDate.of(1990, 7, 15)
     );
     Film film = new Film(0,
-            "Name",
-            "Description",
-            LocalDate.of(1985, 5, 10),
-            120,
-            new Mpa(1)
+            "Film Updated",
+            "New film update decription",
+            LocalDate.of(1989, 4, 17),
+            190,
+            new Mpa(5)
     );
     Film updatedFilm = new Film(1,
-            "Name",
-            "Description",
-            LocalDate.of(1989, 10, 12),
-            120,
-            new Mpa(2)
+            "Film Updated",
+            "New film update decription",
+            LocalDate.of(1989, 4, 17),
+            190,
+            new Mpa(5)
     );
 
     @BeforeEach
