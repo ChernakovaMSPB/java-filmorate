@@ -1,7 +1,7 @@
 # java-filmorate
 Template repository for Filmorate project.
 
-![alt text](resources/PUBLIC-Filmorate.png)
+![DB schema](src/main/resources/PUBLIC-Filmorate.png)
 
 ### Примеры запросов в базу данных
 
