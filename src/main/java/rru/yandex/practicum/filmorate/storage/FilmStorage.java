@@ -8,9 +8,15 @@ public interface FilmStorage {
 
     List<Film> findAll();
 
-    void create(Film film);
+    Film create(Film film);
 
     Film getById(long id);
+
+    Film update(Film film);
+
+    void deleteFilm(long id);
+
+    List<Film> getPopular(int count);
 }
 
 
