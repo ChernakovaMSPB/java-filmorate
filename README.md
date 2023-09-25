@@ -12,6 +12,9 @@ Template repository for Filmorate project.
 - добавление пользователей в друзья
 - удаление пользователей
 
+# Используемые технологии 
+Java, Maven, Spring-Boot, PostgreSQL
+
 ![DB schema](src/main/resources/PUBLIC-Filmorate.png)
 
 ### Примеры запросов в базу данных
